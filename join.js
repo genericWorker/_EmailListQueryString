@@ -1,26 +1,27 @@
 "use strict";
 
-const $ = function(id) {
-    return document.getElementById(id);
-};
- 
-// Get value of queryString parameter using the parameter key
-const getQueryStringParmValue = (parmKey) => {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const paramValue = urlParams.get(parmKey);
-    console.log('parmKey/value' + parmKey + ':' + paramValue); 
-    return paramValue; 
-};
+const $ = (id) => document.getElementById(id);
 
 const confirmData = function() {
     $("confirm_form").submit(); 
 }; 
 
-window.onload = function() {
-    $("firstName").innerHTML = 'First Name: ' + 
-    getQueryStringParmValue("first_name"); 
-    $("emailAddress").innerHTML = 'Email Address: ' + 
-        getQueryStringParmValue("email_address1"); 
-    $("confirmBtn").onclick = confirmData;   
-};
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. Get the query string from the URL
+    const queryString = window.location.search;
+    
+    // 2. Parse the parameters
+    const urlParams = new URLSearchParams(queryString);
+    
+    // 3. Extract the specific values (matching the 'name' attribute from your previous form)
+    const firstName = urlParams.get("first_name");
+    const email = urlParams.get("email_address1");
+
+    // 4. Display the data in the spans
+    if (firstName) {
+        $("first_name_display").textContent = firstName;
+    }
+    if (email) {
+        $("email_display").textContent = email;
+    }
+});

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">	
     <title>Join Email List</title>
-    <link rel="stylesheet" href="email_list.css">
+    <link rel="stylesheet" href="styles.css">
     <script src="email_list.js"></script>
 </head>
 <body>
@@ -22,10 +22,10 @@
             <label for="first_name">First Name</label>
             <input type="text" id="first_name" name="first_name"><br>
         </div>
-        <div>
-            <label>&nbsp;</label>
-            <input type="button" id="join_list" value="Join our List">
-            <input type="button" id="clear_form" value="Clear Form">
+        <span id="error_message" style="color: red; height: 1.2em;"></span>
+        <div class="button-group">
+            <button type="submit" id="join_list">Join our List</button>
+            <button type="reset" id="clear_btn">Clear Form</button>
         </div> 
       </form>
     </main>

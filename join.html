@@ -3,21 +3,22 @@
 <head>
     <meta charset="UTF-8">	
     <title>Thanks for joining</title>
-    <link rel="stylesheet" href="email_list.css"> 
+    <link rel="stylesheet" href="styles.css"> 
     <script src="join.js"></script> 
 </head>
 
 <body>
-    <main>
-        <form id="confirm_form" name="confirm_form" action="confirmed.html" method="get">
-        <h1>Thanks for joining our email list!</h1> 
-        <h1>Confirm your data:</h1> 
-        <h4 id="firstName"></h4>   
-        <h4 id="emailAddress"></h4> 
+   <main>
+    <form id="confirm_form" name="confirm_form" action="confirmed.html" method="get">
+        <h3>Thanks for joining our email list!</h3> 
+
+        <p><strong>First Name:</strong> <span id="first_name_display"></span></p>
+        <p><strong>Email Address:</strong> <span id="email_display"></span></p>
   
-        <label>&nbsp;</label>
-        <input type="button" id="confirmBtn" value="Confirm">
+        <div class="buttons">
+            <button type="submit" id="confirm_btn">Confirm</button>
+        </div>
     </form>
-    </main>
+</main>
 </body>
 </html>
