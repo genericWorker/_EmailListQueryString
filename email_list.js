@@ -18,6 +18,9 @@ const joinList = function(evt) { // Added 'evt' parameter here
     } else if (email2 !== email1) {
         errorMessage = "Email address entries must match";
         $("email_address2").focus();
+    } else if (!isValidEmail(email1)) {
+        errorMessage = "Invalid email format";
+        $("email_address2").focus();
     } else if (firstName === "") {
         errorMessage = "First name entry required";
         $("first_name").focus();
@@ -39,6 +42,16 @@ const clearForm = () => {
     $("first_name").value = "";
     $("error_message").textContent = ""; // Clear the error message area too
     $("email_address1").focus();
+};
+
+const isValidEmail = (email) => {
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  return emailRegex.test(email);
+  /* 
+  onsole.log(isValidEmail("hello@example.com")); // true
+  console.log(isValidEmail("invalid-email@"));    // false
+  console.log(isValidEmail("user@domain.co.uk")); // true
+  */
 };
 
 document.addEventListener("DOMContentLoaded", () => {

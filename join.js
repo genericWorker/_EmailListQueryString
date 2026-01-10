@@ -8,7 +8,7 @@ const confirmData = function() {
 
 document.addEventListener("DOMContentLoaded", () => {
     // 1. Get the query string from the URL
-    const queryString = window.location.search;
+    const queryString =                                            window.location.search;
     
     // 2. Parse the parameters
     const urlParams = new URLSearchParams(queryString);

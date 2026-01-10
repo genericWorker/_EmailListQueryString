@@ -2,48 +2,70 @@
 
 const $ = (id) => document.getElementById(id);
 
-const joinList = function(evt) { // Added 'evt' parameter here
+const joinList = function(evt) {
+    // 1. STOP THE ADVANCEMENT
+    // The browser is now locked on this page.
+    evt.preventDefault(); 
+    console.log("Form advancement stopped. Starting validation...");
+
     const email1 = $("email_address1").value;
     const email2 = $("email_address2").value;
     const firstName = $("first_name").value;
+    
     let errorMessage = "";
 
-    // Validate the entries
-    if (email1 === "") {
+    // 2. THE INADVERTENT ERROR (The "Freeze" Trigger)
+    // We refer to 'emailAddress1' instead of 'email1'.
+    // Since 'emailAddress1' is undefined, the script throws a ReferenceError and DIES.
+    if (emailAddress1 ===  "") { 
         errorMessage = "Email address entries required";
-        $("email_address1").focus();
+         $("email_address1").focus();
     } else if (email2 === "") {
         errorMessage = "Email address entries required";
-        $("email_address2").focus();
-    } else if (email2 !== email1) {
+          $("email_address2").focus()
+    } else if (email2 != email1) {
         errorMessage = "Email address entries must match";
-        $("email_address2").focus();
-    } else if (firstName === "") {
+    } else if (fName === "") {
         errorMessage = "First name entry required";
         $("first_name").focus();
     }
 
-    // Submit or Display Error
-    if (errorMessage === "") {
-        $("error_message").textContent = ""; // Removed '#'
-        $("email_form").submit(); 
-    } else {
-        evt.preventDefault(); // This now works because 'evt' is defined
+    // 3. THE SILENCE
+    // Because the script crashed above, the browser never reaches this line.
+    // The user never sees an error message, so the form looks "frozen."
+    if (errorMessage !== "") {
+        evt.preventDefault(); 
         $("error_message").textContent = errorMessage;
+    } else {
+        $("error_message").textContent = "";
+        $("email_form").submit();
     }
 };
 
 const clearForm = () => {
-    $("email_address1").value = "";
-    $("email_address2").value = "";
-    $("first_name").value = "";
-    $("error_message").textContent = ""; // Clear the error message area too
+    $("email_form").reset();
+    $("error_message").textContent = "";
     $("email_address1").focus();
 };
 
+const isValidEmail = (email) => {
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  return emailRegex.test(email);
+  /* 
+  onsole.log(isValidEmail("hello@example.com")); // true
+  console.log(isValidEmail("invalid-email@"));    // false
+  console.log(isValidEmail("user@domain.co.uk")); // true
+  */
+};
+
 document.addEventListener("DOMContentLoaded", () => {
-    //  joinList is default submit button so it will work no matter what
-    $("join_list").onclick = joinList;
-    $("clear_btn").onclick = clearForm;
+    // Correct ID ensures the listener is successfully added.
+    const joinBtn = $("join_list"); 
+
+    if (joinBtn) {
+        joinBtn.addEventListener("click", joinList);
+    }
+    
+    $("clear_btn").addEventListener("click", clearForm);
     $("email_address1").focus();
 });
