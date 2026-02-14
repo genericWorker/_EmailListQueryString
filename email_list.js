@@ -15,11 +15,12 @@ const joinList = function(evt) { // Added 'evt' parameter here
     } else if (email2 === "") {
         errorMessage = "Email address entries required";
         $("email_address2").focus();
-    } else if (email2 !== email1) {
-        errorMessage = "Email address entries must match";
-        $("email_address2").focus();
-    } else if (!isValidEmail(email1)) {
+     }
+     else if (!isValidEmail(email1)) {
         errorMessage = "Invalid email format";
+        $("email_address2").focus();
+    } else if (email2 !== email1) { 
+        errorMessage = "Email address entries must match";
         $("email_address2").focus();
     } else if (firstName === "") {
         errorMessage = "First name entry required";
